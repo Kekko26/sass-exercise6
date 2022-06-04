@@ -1,0 +1,63 @@
+@use 'variables' as c;
+@use 'px-to-rem' as f;
+
+@mixin square($color, $bordercolor, $fontsize: 1rem){
+    color: $color;
+    border: f.convertpx(1) solid $bordercolor;
+    font-size: $fontsize;
+    text-align: center;
+    padding: f.convertpx(10);
+}
+
+%titles{
+    color: c.$greencolor;
+    margin-bottom: f.convertpx(2);
+    border-bottom: f.convertpx(1) solid c.$bluecolor;
+}
+
+div{
+    border: solid f.convertpx(1) c.$redcolor;
+    width: 100vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+        h1{
+            @extend %titles;
+        }
+
+        h2{
+            @extend %titles;
+            padding: 1rem;
+            border: red 1px solid;
+        }
+
+        section{
+            display: flex;
+            width: 95%;
+            // margin: 0 20px;
+
+            article{
+
+                &:nth-child(odd){
+                    @include square(c.$bluecolor, c.$greencolor);
+
+                }
+                &:nth-child(even){
+                    @include square(c.$redcolor, c.$greencolor);
+
+                }
+            }
+        
+
+        &:last-child{
+            article{
+                @include square(c.$greencolor,c.$bluecolor, f.convertpx(24));
+                padding: 0 f.convertpx(20);
+                width: 100%;
+            }
+            }
+        }
+ }
